@@ -20,6 +20,18 @@ public class Fragment extends android.app.Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_first,container,false);
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null){
+            counter=0;
+        }
+        else{
+            counter = savedInstanceState.getInt("Counter",0);
+        }
     }
 
     @Override
@@ -28,6 +40,12 @@ public class Fragment extends android.app.Fragment implements View.OnClickListen
         comm = (Communicator) getActivity();
         buttonClickMe = (Button) getActivity().findViewById(R.id.btn_fragment_click_me);
         buttonClickMe.setOnClickListener(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("Counter",counter);
     }
 
     @Override
